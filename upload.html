@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8" />
+    <title>Stamplia Builder</title>
+
+            <link rel="stylesheet" href="./bundles/insytiobuilder/css/bootstrap.css?" />
+        <link rel="stylesheet" href="./bundles/insytiobuilder/css/ekko-lightbox.min.css?" />
+        <link rel="stylesheet" href="./bundles/insytiobuilder/css/jquery.bxslider.css?" />
+        <link rel="stylesheet" href="./bundles/insytiobuilder/css/backend-styles.css?" />
+        <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    
+    </head>
+  <body>
+  <!-- Google Tag Manager -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WL8NG3"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WL8NG3');</script>
+  <!-- End Google Tag Manager -->
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+          analytics.load("rZwPfYtOy1bK9GvK9b4Kj8istJP2af3Y");
+          analytics.page()
+      }}();
+  </script>
+  
+    <div class="wrapper">
+        
+
+        <div class="container">
+            
+                <div class="right_side">
+        <div class="rightside_inner">
+            <div class="uploads_page">
+                <div class="upload_heading">
+                    <h1>You don’t have a insytio template, but you want to use an email template that you already have?</h1>
+
+                    <p>
+                        No worries. You can make it compatible with our editor. Just
+                        <a href="/doc/" style="color:#1abc9c">follow the guide!</a><br><br>
+
+                        All features are available: it is automatically compatible with email providers, 100% customizable with layout modules, and more&hellip;
+                    </p>
+
+                </div><!-- /uploads_heading -->
+                <form id="upload-template" action="https://builder.stamplia.com/template/upload" method="post" enctype="multipart/form-data">
+                    <div class="uploadleft">
+
+                        <div class="formrow">
+                            <label>Template Name</label>
+                                                            <input id="template_name" name="template_name" type="text" placeholder="Template Title" required>
+                                                    </div><!-- /formrow -->
+
+                        <div class="formrow">
+                            <label>Upload Html</label>
+                            <div class="fileUpload">
+                                <span>Choose html file</span>
+                                <input id="uploadFile" placeholder="Browse File">
+                                <input id="uploadBtn" name="html_file" type="file" class="upload">
+
+                            </div>
+                        </div><!-- /formrow -->
+
+
+                        <div class="formrow">
+                            <label>Upload Images</label>
+                            <div class="dnd">
+                                Drag and Drop Here
+                                <ul style="list-style:none"></ul>
+                            </div>
+                        </div><!-- /formrow -->
+
+                        <div class="formrow">
+                                                        <div class="upload">
+
+                                <input id="fileupload" type="file" name="files[]" data-url="https://builder.stamplia.com/template/uploadimage">
+                            </div>
+                        </div><!-- /formrow -->
+
+                    </div><!-- uploadleft -->
+
+                    <div class="divider"></div>
+
+
+                    <div class="uploadright">
+                        <p>JUST PASTE YOUR CODE BELOW</p>
+                        <textarea name="html_code" id="html_code"></textarea>
+
+                        <br/><br/>
+                        
+                        <input type="submit" value="ADD TEMPLATE" class="add_template">
+
+                    </div><!-- uploadright -->
+                </form>
+
+
+            </div><!-- end of uploads_page -->
+
+        </div><!-- /rightsideinner -->
+    </div>
+
+
+
+        </div>
+        <!-- /container -->
+
+    </div>
+    <!-- /wrapper -->
+    <!-- templatename pop -->
+    <div class="overlaybg templatename_pop">
+        <div class="overlayholder">
+          <header><h3>Give your Template a nice name</h3><div class="cross">✖</div></header>
+          <div class="overlaybody">
+            <form method="post" action="/template/duplicate">
+              <div class="fields">
+              <label>Name: </label>
+              <input type="text" name="form[template_name]" class="template_name" placeholder="Template name" required>
+              <input type="hidden" name="form[purchase_id]" class="purchase_id" value="">
+              <input type="hidden" name="form[edit_id]" class="edit_id" value="">
+              <input type="hidden" name="form[template_id]" class="template_id" value="">
+            </div>
+              <div class="clearfix"></div>
+              <footer>
+                <a class="closeoverlay">CLOSE</a>
+                <input type="submit" class="name_submit" value="GO">
+
+              </footer>
+            </form>
+          </div>
+        </div>
+
+    </div>
+    <!-- /templatename pop -->
+
+    <!-- delete template pop -->
+    <div class="overlaybg deletetemplate_pop">
+        <div class="overlayholder">
+            <header><h3>Delete template <span></span></h3><div class="cross">✖</div></header>
+            <div class="overlaybody">
+                <form method="get" action="" id="delete-template-form">
+                    <div class="fields">
+                        <label style="text-align:center;display:block;">Are you sure you want to delete this template?</label>
+                    </div>
+                    <div class="clearfix"></div>
+                    <footer>
+                        <a class="closeoverlay">CANCEL</a>
+                        <input type="hidden" name="id" value="" id="delete-template-id">
+                        <input type="hidden" name="redirect" value="https%3A%2F%2Fbuilder.stamplia.com%2FuploadsTemplate" id="delete-template-id">
+                        <input type="submit" class="name_submit" value="DELETE">
+                    </footer>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- /delete template pop-->
+
+    <!-- templatename pop -->
+    <div class="overlaybg exportoptions_pop">
+        <div class="overlayholder">
+          <header><h3>Export Options</h3><div class="cross">✖</div></header>
+          <div class="overlaybody clearfix">
+            <div class="spinner" style="display:none;text-align:center">
+                <img src="./bundles/insytiobuilder/img/imgloader.gif"/>
+            </div>
+                            <div class="fields" style="font-size: 1.2em;text-align: center">
+                  Please <a href="https://builder.stamplia.com/settings">connect your email provider</a>
+              </div>
+                        </div>
+        </div>
+
+    </div>
+    <!-- /templatename pop -->
+
+    <!-- download pop -->
+    <div class="overlaybg download_pop">
+        <div class="overlayholder">
+          <header><h3>CHOOSE HOW TO DOWNLOAD YOUR TEMPLATE</h3><div class="cross">✖</div></header>
+          <div class="overlaybody">
+            <form action="" method="get">
+              <div class="downloadfields">
+              <div class="htmlcheckbox checker">
+                <input type="checkbox" class="ckselect" value="html" id="htmlcheckbox" name="check" />
+                <label class="addbg" for="htmlcheckbox"></label>
+              </div>
+
+              <div class="cmcheckbox checker">
+                <input type="checkbox" class="ckselect" value="campaignmonitor" id="cmcheckbox" name="check" />
+                <label class="addbg" for="cmcheckbox"></label>
+              </div>
+
+              <div class="mccheckbox checker">
+                <input type="checkbox" class="ckselect" value="mailchimp" id="mccheckbox" name="check" />
+                <label class="addbg" for="mccheckbox"></label>
+              </div>
+
+                                                            
+                                                            
+
+            </div>
+              <div class="clearfix"></div>
+              <footer>
+                <a class="closeoverlay">CLOSE</a>
+                <input type="hidden" name="template_type" class="template_type" value="">
+                <input type="hidden" name="template_id" class="template_id" value="">
+                <input type="submit" class="download_submit" value="DOWNLOAD">
+              </footer>
+            </form>
+          </div>
+        </div>
+
+    </div>
+    <!-- /download pop -->
+
+
+  <!-- websigner pop -->
+  <div class="overlaybg webdesigner_pop">
+      <div class="overlayholder">
+          <header></header>
+          <div class="overlaybody">
+              <h3 style="text-align:center;margin-bottom: 2em;font-size: 1.4em;">Are you a webdesigner?</h3>
+              <footer>
+                  <a href="" class="closeoverlay webdesigner" data-value="false">NO</a>
+                  <a href="" class="closeoverlay webdesigner" data-value="true">YES</a>
+              </footer>
+          </div>
+      </div>
+
+  </div>
+  <!-- /websigner pop -->
+
+                        <script id="IntercomSettingsScriptTag">
+
+            window.intercomSettings = {"template_upload":false,"templates_uploaded":0,"email_providers":"","email_providers_connected":0,"template_edits":3,"templates_purchased":0,"export":false,"free_templates_used":"Minty, Minty, Underscore","test_email":false,"free_template_used":true,"download":false,"editor_used":true,"IP":"127.0.0.1","webdesigner":"true"};
+            window.intercomSettings['name'] = "Dhurv";
+            window.intercomSettings['source'] = "builder";
+            window.intercomSettings['email'] = "dhruv.srivastav@insytio.com";
+            window.intercomSettings['user_id'] = "46814_34zjutfxkeyo4w04g84sc0k880o8sogosw44g8000040k0owc0";
+            window.intercomSettings['created_at'] = "1469700493";
+            window.intercomSettings['app_id'] = "vixoxshw";
+        </script>
+        <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://static.intercomcdn.com/intercom.v1.js';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+                <script type="text/javascript" src="./bundles/insytiobuilder/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="./bundles/insytiobuilder/js/bootstrap.js"></script>
+        <script type="text/javascript" src="./bundles/insytiobuilder/js/ekko-lightbox.min.js"></script>
+        <script type="text/javascript" src="./bundles/insytiobuilder/js/jquery.bxslider.min.js"></script>
+        <script type="text/javascript" src="./bundles/insytiobuilder/js/script.js"></script>
+    
+    <script type="text/javascript" src="./bundles/insytiobuilder/js/uploadimage/js/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="./bundles/insytiobuilder/js/uploadimage/js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="./bundles/insytiobuilder/js/uploadimage/js/jquery.iframe-transport.js"></script>
+    <script type="text/javascript" src="./bundles/insytiobuilder/js/uploadimage/js/jquery.knob.js"></script>
+
+    <script type="text/javascript" src="./bundles/insytiobuilder/js/uploadimage/js/script.js"></script>
+
+  </body>
+  </html>
+

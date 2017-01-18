@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>insytio - Dashboard</title>
+    <link href="css/application.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
+    <!--[if IE 9]>
+        <link href="css/application-ie9-part2.css" rel="stylesheet">
+    <![endif]-->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script>
+        /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
+         chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
+         https://code.google.com/p/chromium/issues/detail?id=332189
+         */
+    </script>
+    
+</head>
+<body>
+<!--
+  Main sidebar seen on the left. may be static or collapsing depending on selected state.
+
+    * Collapsing - navigation automatically collapse when mouse leaves it and expand when enters.
+    * Static - stays always open.
+-->
+<nav id="sidebar" class="sidebar" role="navigation">
+    <!-- need this .js class to initiate slimscroll -->
+    <div class="js-sidebar-content">
+        <header class="logo hidden-sm-down">
+            <a href="index.html">insytio</a>
+        </header>
+        <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
+             looks good, so adding it and enhancing with notifications -->
+        <div class="sidebar-status hidden-md-up">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="thumb-sm avatar pull-xs-right">
+                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                </span>
+                <!-- .circle is a pretty cool way to add a bit of beauty to raw data.
+                     should be used with bg-* and text-* classes for colors -->
+                <span class="circle bg-warning fw-bold text-gray-dark">
+                    13
+                </span>
+                &nbsp;
+                Dhruv <strong>Srivastav</strong>
+                <b class="caret"></b>
+            </a>
+            <!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
+        </div>
+        <!-- main notification links are placed inside of .sidebar-nav -->
+        <ul class="sidebar-nav">
+            <li class="active">
+                <a href="index.html">
+                    <span class="icon">
+                        <i class="fa fa-desktop"></i>
+                    </span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a href="#sidebar-email" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    Email
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-email" class="collapse in">
+                    <li><a href ="#" onclick="load_mail()">Editor</a></li>
+                    <li><a href="#" onclick="load_upload()">Upload</a></li>
+                    <li><a href="#" onclick="load_settings()">Settings</a></li>
+                    <li><a href="#" onclick="load_template()">My Templates</a></li>
+                    <li><a href="#" onclick="load_list()">My List</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- every .sidebar-nav may have a title -->
+        <h5 class="sidebar-nav-title">Other Info <a class="action-link" href="#"><i class="glyphicon glyphicon-refresh"></i></a></h5>
+    </div>
+</nav>
+<!-- This is the white navigation bar seen on the top. A bit enhanced BS navbar. See .page-controls in _base.scss. -->
+<nav class="page-controls navbar navbar-dashboard">
+    <div class="container-fluid">
+        <!-- .navbar-header contains links seen on xs & sm screens -->
+        <div class="navbar-header">
+
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <!-- whether to automatically collapse sidebar on mouseleave. If activated acts more like usual admin templates -->
+                    <a class="hidden-md-down nav-link" id="nav-state-toggle" href="#" data-toggle="tooltip" data-html="true" data-original-title="Turn<br>on/off<br>sidebar<br>collapsing" data-placement="bottom">
+                        <i class="fa fa-bars fa-lg"></i>
+                    </a>
+                    <!-- shown on xs & sm screen. collapses and expands navigation -->
+                    <a class="hidden-lg-up nav-link" id="nav-collapse-toggle" href="#" data-html="true" title="Show/hide<br>sidebar" data-placement="bottom">
+                        <span class="rounded rounded-lg bg-gray text-white hidden-md-up"><i class="fa fa-bars fa-lg"></i></span>
+                        <i class="fa fa-bars fa-lg hidden-sm-down"></i>
+                    </a>
+                </li>
+                <li>
+                <h1 style="padding-left:10px;padding-top:5px">Dashboard <small><small>Basicxx-UAE</small></small></h1>
+                  
+                </li>
+            </ul>
+
+            <!-- xs & sm screen logo -->
+            <a class="navbar-brand hidden-md-up" href="index.html">
+                <i class="fa fa-circle text-gray mr-n-sm"></i>
+                <i class="fa fa-circle text-warning"></i>
+                &nbsp;
+                insyt
+                &nbsp;
+                <i class="fa fa-circle text-warning mr-n-sm"></i>
+                <i class="fa fa-circle text-gray"></i>
+            </a>
+        </div>
+
+        <!-- this part is hidden for xs screens -->
+      <div class="collapse navbar-collapse">
+           
+            <ul class="nav navbar-nav pull-xs-right">
+                <li class="nav-item" style="padding:5px 5px">
+                    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 10px 10px; border: 2px solid #ccc; width: 100%">
+    <i class="fa fa-calendar"></i>&nbsp;
+    <span></span> <b class="caret"></b>
+</div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle dropdown-toggle-notifications nav-link" id="notifications-dropdown-toggle" data-toggle="dropdown">
+                        <span class="thumb-sm avatar pull-xs-left">
+                            <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                        </span>
+                        &nbsp;
+                        Dhruv <strong>Srivastav</strong>&nbsp;
+                        <span class="circle bg-warning fw-bold">
+                            13
+                        </span>
+                        <b class="caret"></b></a>
+                    <!-- ready to use notifications dropdown.  inspired by smartadmin template.
+                         consists of three components:
+                         notifications, messages, progress. leave or add what's important for you.
+                         uses insytio's ajax-load plugin for async content loading. See #load-notifications-btn -->
+                    <div class="dropdown-menu dropdown-menu-right animated fadeInUp" id="notifications-dropdown-menu">
+                        <section class="card notifications">
+                            <header class="card-header">
+                                <div class="text-xs-center mb-sm">
+                                    <strong>You have 13 notifications</strong>
+                                </div>
+                                <div class="btn-group btn-group-sm btn-group-justified" id="notifications-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active">
+                                        <!-- ajax-load plugin in action. setting data-ajax-load & data-ajax-target is the
+                                             only requirement for async reloading -->
+                                        <input type="radio" checked
+                                               data-ajax-trigger="change"
+                                               data-ajax-load="demo/ajax/notifications.html"
+                                               data-ajax-target="#notifications-list"> Notifications
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                        <input type="radio"
+                                               data-ajax-trigger="change"
+                                               data-ajax-load="demo/ajax/messages.html"
+                                               data-ajax-target="#notifications-list"> Messages
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                        <input type="radio"
+                                               data-ajax-trigger="change"
+                                               data-ajax-load="demo/ajax/progress.html"
+                                               data-ajax-target="#notifications-list"> Progress
+                                    </label>
+                                </div>
+                            </header>
+                            <!-- notification list with .thin-scroll which styles scrollbar for webkit -->
+                            <div id="notifications-list" class="list-group thin-scroll">
+                                <div class="list-group-item">
+                                <span class="thumb-sm pull-xs-left mr clearfix">
+                                    <img class="img-circle" src="demo/img/people/a3.jpg" alt="...">
+                                </span>
+                                    <p class="no-margin overflow-hidden">
+                                        1 new user just signed up! Check out
+                                        <a href="#">Monica Smith</a>'s account.
+                                        <time class="help-block no-margin">
+                                            2 mins ago
+                                        </time>
+                                    </p>
+                                </div>
+                                <a class="list-group-item" href="#">
+                                <span class="thumb-sm pull-xs-left mr">
+                                    <i class="glyphicon glyphicon-upload fa-lg"></i>
+                                </span>
+                                    <p class="text-ellipsis no-margin">
+                                        2.1.0-pre-alpha just released. </p>
+                                    <time class="help-block no-margin">
+                                        5h ago
+                                    </time>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                <span class="thumb-sm pull-xs-left mr">
+                                    <i class="fa fa-bolt fa-lg"></i>
+                                </span>
+                                    <p class="text-ellipsis no-margin">
+                                        Server load limited. </p>
+                                    <time class="help-block no-margin">
+                                        7h ago
+                                    </time>
+                                </a>
+                                <div class="list-group-item">
+                                <span class="thumb-sm pull-xs-left mr clearfix">
+                                    <img class="img-circle" src="demo/img/people/a5.jpg" alt="...">
+                                </span>
+                                    <p class="no-margin overflow-hidden">
+                                        User <a href="#">Jeff</a> registered
+                                        &nbsp;&nbsp;
+                                        <a class="label label-success">Allow</a>
+                                        <a class="label label-danger">Deny</a>
+                                        <time class="help-block no-margin">
+                                            12:18 AM
+                                        </time>
+                                    </p>
+                                </div>
+                                <div class="list-group-item">
+                                    <span class="thumb-sm pull-xs-left mr">
+                                        <i class="fa fa-shield fa-lg"></i>
+                                    </span>
+                                    <p class="no-margin overflow-hidden">
+                                        Instructions for changing your Envato Account password. Please
+                                        check your account <a href="#">security page</a>.
+                                        <time class="help-block no-margin">
+                                            12:18 AM
+                                        </time>
+                                    </p>
+                                </div>
+                                <a class="list-group-item" href="#">
+                                <span class="thumb-sm pull-xs-left mr">
+                                    <span class="rounded bg-primary rounded-lg">
+                                        <i class="fa fa-facebook text-white"></i>
+                                    </span>
+                                </span>
+                                    <p class="text-ellipsis no-margin">
+                                        New <strong>76</strong> facebook likes received.</p>
+                                    <time class="help-block no-margin">
+                                        15 Apr 2014
+                                    </time>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                <span class="thumb-sm pull-xs-left mr">
+                                    <span class="circle circle-lg bg-gray-dark">
+                                        <i class="fa fa-circle-o text-white"></i>
+                                    </span>
+                                </span>
+                                    <p class="text-ellipsis no-margin">
+                                        Dark matter detected.</p>
+                                    <time class="help-block no-margin">
+                                        15 Apr 2014
+                                    </time>
+                                </a>
+                            </div>
+                            <footer class="card-footer text-sm">
+                                <!-- ajax-load button. loads demo/ajax/notifications.php to #notifications-list
+                                     when clicked -->
+                                <button class="btn-label btn-link pull-xs-right"
+                                        id="load-notifications-btn"
+                                        data-ajax-load="demo/ajax/notifications.php"
+                                        data-ajax-target="#notifications-list"
+                                        data-loading-text="<i class='fa fa-refresh fa-spin mr-xs'></i> Loading...">
+                                    <i class="fa fa-refresh"></i>
+                                </button>
+                                <span>Synced at: 21 Apr 2014 18:36</span>
+                            </footer>
+                        </section>
+                    </div>
+                </li>
+                <li class="dropdown nav-item">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <i class="fa fa-cog fa-lg"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a class="dropdown-item" href="profile.html"><i class="glyphicon glyphicon-user"></i> &nbsp; My Account</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="calendar.html">Calendar</a></li>
+                        <li><a class="dropdown-item" href="inbox.html">Inbox &nbsp;&nbsp;<span class="label label-pill label-danger animated bounceIn">9</span></a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html"><i class="fa fa-sign-out"></i> &nbsp; Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="content-wrap">
+    <!-- main page content. the place to put widgets in. usually consists of .row > .col-lg-* > .widget.  -->
+    <main id="content" class="content" role="main">
+    <div id="majorview" style="width:100%; height:100vh;">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <section class="widget widget-card bg-primary text-white">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="widget-icon">
+                                    <i class="glyphicon glyphicon-globe"></i>
+                                </span>
+                            </div>
+                            <div class="col-xs-9">
+                                <h6 class="no-margin">Customers</h6>
+                                <p class="h2 no-margin fw-normal" id="customers"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h6 class="no-margin">Last Week</h6>
+                                <p class="value5" id="customerweekly"></p>
+                            </div>
+                            <div class="col-xs-6 fs-sm">
+                                <h6 class="no-margin">Last Hour</h6>
+                                <p class="value5" id="customerhourly"></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <section class="widget widget-card bg-info text-white">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="widget-icon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </span>
+                            </div>
+                            <div class="col-xs-9">
+                                <div class="live-tile" data-mode="carousel" data-speed="750" data-delay="3000" data-height="57">
+                                    <div>
+                                        <h6 class="no-margin">Product Views <span class="fw-semi-bold">Hourly</span></h6>
+                                        <p class="h2 no-margin fw-normal" id="pvhourly">0</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="no-margin">Product Views</h6>
+                                        <p class="h2 no-margin fw-normal" id="pv">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h6 class="no-margin">Adds</h6>
+                                <div class="live-tile" data-mode="carousel" data-speed="750" data-delay="3000" data-height="24">
+                                    <div>
+                                        <p class="value5" id="addshourly">0</p>
+                                    </div>
+                                    <div>
+                                        <p class="value5" id="adds">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <h6 class="no-margin">Removes</h6>
+                                <div class="live-tile" data-mode="carousel" data-speed="750" data-delay="3000" data-height="24">
+                                    <div>
+                                        <p class="value5" id="removeshourly">0</p>
+                                    </div>
+                                    <div>
+                                        <p class="value5" id="removes">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <section class="widget widget-card bg-gray">
+                    <div class="widget-body clearfix">
+                        <div class="live-tile" data-mode="fade" data-speed="750" data-delay="4000" data-height="100">
+                            <div class="bg-gray text-white">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <span class="widget-icon">
+                                            <i class="glyphicon glyphicon-globe"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-9" >
+                                        <h6 class="no-margin">Page Views</h6>
+                                        <p class="h2 no-margin fw-normal" id="pageviews"></p>
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <h6 class="no-margin">PPS</h6>
+                                        <p class="value5" id="pageviewpersession">0</p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h6 class="no-margin">Sessions</h6>
+                                        <p class="value5" id="sessions"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-white">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <span class="widget-icon">
+                                            <i class="glyphicon glyphicon-certificate"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <h6 class="no-margin">Transactions</h6>
+                                        <p class="h2 no-margin fw-normal" id="transactions"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <h6 class="no-margin">Last Week</h6>
+                                        <p class="value5" id="transactionsweekly">0</p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h6 class="no-margin">Last Hour</h6>
+                                        <p class="value5" id="transactionshourly"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <section class="widget widget-card bg-success text-white">
+                    <div class="widget-body clearfix">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="widget-icon">
+                                    <i class="glyphicon glyphicon-usd"></i>
+                                </span>
+                            </div>
+                            <div class="col-xs-9">
+                                <h6 class="no-margin">TOTAL SALES</h6>
+                                <p class="h2 no-margin fw-normal" id="sales">0</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h6 class="no-margin">Last Week</h6>
+                                <p class="value5" id="salesweekly">0</p>
+                            </div>
+                            <div class="col-xs-6">
+                                <h6 class="no-margin">Last Hour</h6>
+                                <p class="value5" id="saleshourly"></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div> 
+        <div class="row">
+            <section class="widget">
+            <div class="row">
+                <div class="col-lg-7 col-xl-8">
+                
+                    <header>
+                        <h5>
+                            <span class="fw-semi-bold">Sales</span> Report Analysis
+                        </h5>
+                        <!-- <div class="widget-controls">
+                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div> -->
+                    </header>
+                    <div class="widget-body">
+                        <p class="fs-mini text-muted">
+                            Sales trend of <span class="fw-semi-bold">Basicxx.</span>
+                        </p>
+                        <div id="nvd31">
+                            <svg></svg>
+                        </div>
+                    </div>
+               
+                </div>
+                <div class="col-lg-5 col-xl-4">
+                <header>
+                        <h5>
+                            <span class="fw-semi-bold">Browsers</span> being used.
+
+                        </h5>
+                        <!-- <div class="widget-controls">
+                            <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                        </div> -->
+                </header>
+                    <div class="widget-body">
+                        <div id="morris3" style="padding-top:20px">
+                        
+                        </div>
+                        <!-- <p class="fs-mini text-muted">
+                            Donuts a great for representing some parted information like traffice sources,
+                            disk partitions, etc.
+                            This really couldn't be easier. Create a Donut chart using <code>Morris.Donut(options)</code>,
+                            with only few options.
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+            </section>
+        </div>
+
+        <div class="row">
+            <section class="widget">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-xs-12">
+                
+                    <header>
+                        <h5>
+                            Preferred <span class="fw-semi-bold">Language</span>
+                        </h5>
+                    </header>
+                    <div class="widget-body">
+                        <p class="fs-mini text-muted" style="padding-bottom:20px">
+                            Most frequently used language on <span class="fw-semi-bold">Basicxx.</span>
+                        </p>
+                        <div id="pieChart"></div><br>
+                        <div class="row">
+                            <div class="col-xs-6">
+                            <p class="fs-mini text-muted">
+                                Language Used times- <span><h4 class="fw-semi-bold" id="langname"></h4>
+                                <h3 id="langvalue"></h3></span>
+                            </p>
+                            </div>
+                            <div class="col-xs-6">
+                            <p class="fs-mini text-muted">
+                                Product Views by language- <span><h4 class="fw-semi-bold">product views</h4>
+                                <h3 id="PVvalue"></h3></span>
+                            </p>
+                            </div>
+                        </div>    
+                    </div>
+               
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-12">
+                
+                    <header>
+                        <h5>
+                            User <span class="fw-semi-bold">Referrals</span>
+                        </h5>
+                    </header>
+                    <div class="widget-body" >
+                        <p class="fs-mini text-muted" style="padding-bottom:20px">
+                            Referrals made by users in detail:
+                        </p>
+                        <div id="pieChart2"></div><br>
+                       <div class="row">
+                            <div class="col-xs-6">
+                            <p class="fs-mini text-muted">
+                                Referrals made via- <span><h4 class="fw-semi-bold" id="refname"></h4>
+                                <h3 id="refvalue"></h3></span>
+                            </p>
+                            </div>
+                            <div class="col-xs-6">
+                            <p class="fs-mini text-muted">
+                                Page Views by referral- <span><h4 class="fw-semi-bold">page views</h4>
+                                <h3 id="pgvvalue"></h3></span>
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+               
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-12">
+                
+                    <header>
+                        <h5>
+                            Used <span class="fw-semi-bold">Devices</span>
+                        </h5>
+                    </header>
+                    <div class="widget-body">
+                        <p class="fs-mini text-muted">
+                            Devices used to access website.
+                        </p>
+                        <div id="barchart"><svg></svg></div>
+                    </div>
+               
+                </div>
+            </div>
+            </section>
+        </div>
+        <div class="row">
+                <div>
+                <!-- minimal widget consist of .widget class. note bg-transparent - it can be any background like bg-gray,
+                bg-primary, bg-white -->
+                <section class="widget">
+                    <!-- .widget-body is a mostly semantic class. may be a sibling to .widget>header or .widget>footer -->
+                    <div class="widget-body">
+            <h2><span class="fw-semi-bold">Sales</span> distribution geographically respective to dates selected.</h2><br>
+        <div class="maparea">
+            <div class="map">
+                <span>Sales Distribution</span>
+            </div>
+            <div class="row">
+            <div class="areaLegend">
+                <span></span>
+            </div>
+            <!-- <div class="plotLegend col-xs-6 col-md-6 col-lg-6">
+                <span>By cities</span>
+            </div> -->
+            </div>
+        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+</div>
+    </main>
+</div>
+<!-- The Loader. Is shown when pjax happens -->
+<div class="loader-wrap hiding hide">
+    <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+</div>
+
+
+<script>
+function load_mail(){
+            document.getElementById("majorview").innerHTML='<object style="width:inherit; height:inherit;" type="text/html" data="template.html" ></object>';}
+
+function load_settings(){
+            document.getElementById("majorview").innerHTML='<object style="width:inherit; height:inherit;" type="text/html" data="settings.html" ></object>';}
+            
+function load_upload(){
+            document.getElementById("majorview").innerHTML='<object style="width:inherit; height:inherit;" type="text/html" data="upload.html" ></object>';}
+
+          
+</script>
+<!-- common libraries. required for every page-->
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/jquery-pjax/jquery.pjax.js"></script>
+<script src="vendor/tether/dist/js/tether.js"></script>
+<script src="vendor/bootstrap/js/dist/util.js"></script>
+<script src="vendor/bootstrap/js/dist/collapse.js"></script>
+<script src="vendor/bootstrap/js/dist/dropdown.js"></script>
+<script src="vendor/bootstrap/js/dist/button.js"></script>
+<script src="vendor/bootstrap/js/dist/tooltip.js"></script>
+<script src="vendor/bootstrap/js/dist/alert.js"></script>
+<script src="vendor/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendor/widgster/widgster.js"></script>
+<script src="vendor/pace.js/pace.js" data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+<script src="vendor/jquery-touchswipe/jquery.touchSwipe.js"></script>
+<script src="js/bootstrap-fix/button.js"></script>
+
+
+<!-- common app js -->
+<script src="js/settings.js"></script>
+<script src="js/app.js"></script>
+
+<!-- page specific libs -->
+<script id="test" src="vendor/underscore/underscore.js"></script>
+<script src="vendor/jQuery-Mapael/js/jquery.mapael.js"></script>
+<script src="vendor/jQuery-Mapael/js/maps/world_countries.js"></script>
+<script src="vendor/bootstrap/js/dist/popover.js"></script>
+<script src="vendor/jquery-animateNumber/jquery.animateNumber.min.js"></script>
+<script src="vendor/jquery.sparkline/index.js"></script>
+<script src="vendor/MetroJS/release/MetroJs.Full/MetroJs.js"></script>
+<script src="vendor/d3/d3.min.js"></script> 
+<script src="vendor/nvd3/build/nv.d3.js"></script>
+<script src="vendor/morris.js/morris.min.js"></script>
+<script src="vendor/raphael/raphael-min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script> 
+
+
+<!-- page specific js -->
+<script src="js/index.js"></script>
+<script src="js/pie.js"></script>
+<script src="js/countries.js"></script>
+<script src="js/mapsales.js"></script>
+</body>
+
+</html>

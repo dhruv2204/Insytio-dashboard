@@ -1,0 +1,226 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='x-ua-compatible', content='IE=edge')
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(name='viewport', content='width=device-width, minimum-scale=1, maximum-scale=1, initial-scale=1, user-scalable=0')
+    link(rel='stylesheet', href='./theone.css')
+    link(rel='stylesheet', type='text/css', href='./release/11.4.16/css/less/pages.css')
+    link(rel='stylesheet', type='text/css', href='./release/11.4.16/css/less/style.css')
+    select#userProperty_Id
+      option(value='') -Select-
+      option(value='number') currentPlan
+      option(value='number') emailsDelivered
+      option(value='number') emailsOpened
+      option(value='text') EmailSubscribed
+      option(value='boolean') emailUnsubscribed
+      option(value='number') age
+      option(value='text') Alias
+      option(value='text') browser
+      option(value='text') check
+      option(value='text') continent
+      option(value='number') count
+      option(value='text') countryCode
+      option(value='text') debug
+      option(value='text') device
+      option(value='number') discussionID
+      option(value='number') Facebook_Share
+      option(value='text') Facebook_Share_first
+      option(value='text') Facebook_Share_last
+      option(value='number') fb_action_ids
+      option(value='text') fb_action_types
+      option(value='text') fb_source
+      option(value='text') file
+      option(value='text') forum
+      option(value='number') forum_id
+      option(value='text') goback
+      option(value='text') image
+      option(value='text') imgurl
+      option(value='number') item
+      option(value='number') Linkedin_Share
+      option(value='text') Linkedin_Share_first
+      option(value='text') Linkedin_Share_last
+      option(value='text') major_version
+      option(value='text') name
+      option(value='text') options
+      option(value='number') page
+      option(value='text') pageTitle
+      option(value='text') pageUrl
+      option(value='number') Pageview
+      option(value='text') Pageview_first
+      option(value='text') Pageview_last
+      option(value='number') pageviews
+      option(value='text') radio
+      option(value='text') sort
+      option(value='text') source
+      option(value='text') src
+      option(value='number') start
+      option(value='number') thread
+      option(value='text') timezone
+      option(value='text') title
+      option(value='number') Tweet
+      option(value='text') Tweet_first
+      option(value='text') Tweet_last
+      option(value='text') type
+      option(value='boolean') updated
+      option(value='text') url
+      option(value='text') userGender
+      option(value='text') zone
+      option(value='text') address
+      option(value='text') badges
+      option(value='text') city
+      option(value='text') company
+      option(value='text') country
+      option(value='text') email
+      option(value='text') fax
+      option(value='text') firstName
+      option(value='number') followers
+      option(value='number') friends
+      option(value='text') fullName
+      option(value='text') gender
+      option(value='text') lastName
+      option(value='number') latitude
+      option(value='number') leadScore
+      option(value='number') level
+      option(value='number') longitude
+      option(value='text') notes
+      option(value='text') otherEmails
+      option(value='text') phone
+      option(value='text') photo
+      option(value='number') plan
+      option(value='number') points
+      option(value='text') position
+      option(value='text') referredBy
+      option(value='text') region
+      option(value='number') sessions
+      option(value='number') totalRevenue
+      option(value='text') username
+      option(value='number') planPrices
+      option(value='number') totalIdentifiedUsersRefered
+      option(value='number') totalUnknownUsersRefered
+      option(value='number') facebookShares
+      option(value='text') planNames
+      option(value='boolean') upgraded
+      option(value='number') facebookClicks
+      option(value='number') facebookFirstShareDate
+      option(value='number') facebookLastShareDate
+      option(value='number') googlePlusClicks
+      option(value='number') googlePlusFirstShareDate
+      option(value='number') googlePlusLastShareDate
+      option(value='number') googlePlusShares
+      option(value='number') linkedinClicks
+      option(value='number') linkedinFirstShareDate
+      option(value='number') linkedinLastShareDate
+      option(value='number') linkedinShares
+      option(value='number') twitterClicks
+      option(value='number') twitterFirstShareDate
+      option(value='number') twitterLastShareDate
+      option(value='number') twitterShares
+      option(value='number') facebookAccountId
+      option(value='text') facebookAccountName
+      option(value='number') googleAccountId
+      option(value='text') googleAccountName
+      option(value='number') linkedinAccountId
+      option(value='text') linkedinAccountName
+      option(value='number') twitterAccountId
+      option(value='text') twitterAccountName
+      option(value='number') twitterFollowers
+      option(value='number') twitterFollowing
+      option(value='number') totalEventCount
+    select#event_Id
+      option(value='') -Select-
+      option(value='1') Click_on_Amplify_Widget
+      option(value='2') Facebook_Connect
+      option(value='3') Facebook_Like
+      option(value='4') Facebook_Share
+      option(value='5') Facebook_Unlike
+      option(value='6') Google_Connect
+      option(value='7') Google_Share
+      option(value='8') LinkedIn_Connect
+      option(value='9') Linkedin_Share
+      option(value='10') Pinterest_Share
+      option(value='11') Register
+      option(value='12') Search
+      option(value='13') Session_Start
+      option(value='14') Signed_In
+      option(value='15') Tweet
+      option(value='16') Twitter_Connect
+    select#product_Id.form-control
+      option(value='') -Select-
+      option(value='1') viewed
+      option(value='2') purchased
+      option(value='3') wishlist
+      option(value='4') add to card
+      option(value='5') reviewed
+      option(value='6') shared
+      option(value='7') completed
+      option(value='8') removed from card
+    select#campaign_Id.form-control
+      option(value='') -Select-
+      option(value='1') viewed
+      option(value='2') Opened
+      option(value='3') Clicked
+      option(value='4') Engaged
+    select#property_condition_Id
+      option(value='') -Select-
+      option(value='1') simply has this property
+      option(value='2') doesnot have this property
+      option(value='3') contain following words
+    select#event_condition_Id
+      option(value='') -Select-
+      option(value='1') equal
+      option(value='2') greater than
+      option(value='3') less than
+      option(value='4') never occured
+      option(value='9') has occured
+      option(value='5') first occuarance date less than
+      option(value='6') first occuarance date more than
+      option(value='7') last occuarance date less than
+      option(value='8') last occuarance date more than
+  body
+    script(type='text/javascript', src='./list.js?')
+    script(type='text/javascript', src='./release/11.4.16/js/dojo/dojo.js')
+    script(type='text/javascript', src='./release/11.4.16/js/dojo/mccommon.js')
+    script(type='text/javascript', src='./release/11.4.16/js/snap/snap.svg-min.js')
+    script(type='text/javascript', src='./release/11.4.16/js/ZeroClipboard/ZeroClipboard.min.js')
+    script(type='text/javascript', src='./release/11.4.16/js/swfobject.js')
+    body
+      h2 Campaign info
+      .line.overflow-visible
+        .lastUnit.size1of1
+          label(for='title') Campaign name
+      .line.overflow-visible
+        .unit.size1of2.readable-max-width.overflow-visible
+          .field-wrapper
+            input#title.av-text(type='text', name='content[title]', spellcheck='true', value='')
+            .field-help.always-show Internal use only. Ex: "Newsletter Test#4"
+          .field-wrapper.readable-max-width.subject
+            label(for='subject')
+              | Email subject 
+              span.small-meta.char-count-container
+                span#subject-char.char-count.float-right
+                  span#subject-char-num 150
+                  |  characters remaining
+            .relative(data-dojo-type='mojo/widgets/EmojiPicker')
+              span#dijit_form_DropDownButton_0_label.dijitReset.dijitInline.dijitButtonText(data-dojo-attach-point='containerNode')
+                i.esprite.e-cat-icon.e-mc-people
+              i.esprite.e-cat-icon.e-mc-people
+              input#subject.av-text(type='text', name='content[subject]', onkeyup="mojo.utils.checkInputLength(this,'subject-char-num',150);", spellcheck='true', value='')
+              .field-help.always-show
+                a(href='#', onclick="dijit.byId('subject-help').show(); return false;") How do I write a good subject line?
+                |  • 
+                a#emojisupport.nowrap(href='javascript:;') Emoji support
+          .field-wrapper
+            label(for='from-name')
+              | From name 
+              span.small-meta.char-count-container
+                span#from-char.char-count.float-right
+                  span#from-char-num 100
+                  |  characters remaining
+            input#from-name.av-text(type='text', name='content[from_name]', onkeyup="mojo.utils.checkInputLength(this,'from-char-num',100);", value='')
+            .field-help.always-show  Use something subscribers will instantly recognize, like your company name. 
+          .field-wrapper
+            label(for='from-email') From email address
+            input#from-email.av-email(type='email', name='content[from_email]', data-dojo-type='mojo/app/lists/DMARCInput', value='khushbuparakh@hotmail.com')
+            input#skip-domain-verification.av-hidden(type='hidden', name='skip_domain_verification', value='0')
