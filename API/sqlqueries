@@ -1,0 +1,38 @@
+SELECT SUM(`Sales`) AS Sales FROM `metrics_data` WHERE DATE(`Time`) = CURDATE();
+
+SELECT SUM(`Sales`) AS Sales FROM `metrics_data` WHERE DATE(`Time`) >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND DATE(`Time`) <= CURDATE();
+
+SELECT SUM(`Sales`) AS Sales FROM metrics_data WHERE DATE(`Time`) >= '2016-08-27' AND DATE(`Time`) <= '2016-08-27'
+
+SELECT SUM(`Transactions`) AS Transactions FROM metrics_data WHERE DATE(`Time`) >= '2016-08-27' AND DATE(`Time`) <= '2016-08-27
+
+
+SELECT (SUM(`Pageviews`)/SUM(`Sessions`)) AS PPS FROM metrics_data WHERE DATE(`Time`) >= '2016-08-26' AND DATE(`Time`) <= '2016-08-26'
+
+
+
+
+SELECT `Language`,COUNT(*) as value FROM metrics_data WHERE DATE(`Time`) >= '2016-08-26' AND DATE(`Time`) <= '2016-08-26' GROUP BY `Language` ORDER BY value DESC	
+
+SELECT SUM(`Sales`) as Sales FROM metrics_data WHERE DATE(`Time`) >= '2016-08-26' AND DATE(`Time`) <= '2016-08-26' GROUP BY `Geography` ORDER BY value DESC	
+
+
+this.salesweekly = function(res) {
+    connection.acquire(function(err, con) {
+      con.query('SELECT SUM(`Sales`) AS Sales FROM `metrics_data` WHERE DATE(`Time`) >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND DATE(`Time`) <= CURDATE();', function(err, result) {
+        con.release();
+        res.send(result);
+      });
+    });
+  };
+
+
+this.salesdaily = function(res) {
+    connection.acquire(function(err, con) {
+      con.query('SELECT SUM(`Sales`) AS Sales FROM `metrics_data` WHERE DATE(`Time`) = CURDATE();', function(err, result) {
+        con.release();
+        res.send(result);
+      });
+    });
+  };
+
